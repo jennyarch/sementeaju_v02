@@ -25,7 +25,13 @@ Criar uma presença digital acolhedora, acessível e responsiva para a Semente, 
 - Tema claro como padrão
 - Suporte a tema escuro com controle no cabeçalho
 - Seções de início, sobre, missão, visão, valores, agenda, contribuição, reflexões e contato
+- Carrossel automático no início, com setas, indicadores, botão de pausa e suporte a swipe
+- Doação via Pix na seção de contribuição, com QR Code e cópia da chave para a área de transferência
 - Formulário visual de contato
+- Canais de contato diretos: e-mail e WhatsApp
+- Redes sociais (Instagram, YouTube e WhatsApp) na seção de contato
+- Créditos da desenvolvedora com LinkedIn e WhatsApp no rodapé
+- Favicon, ícone para iOS e ícone vetorial
 - Imagens do projeto e referências do site original
 - Metadados básicos para SEO e idioma `pt-BR`
 
@@ -34,22 +40,48 @@ Criar uma presença digital acolhedora, acessível e responsiva para a Semente, 
 ```text
 .
 ├── app/
-│   ├── globals.css       # Tokens de tema, estilos globais e utilitários visuais
-│   ├── layout.tsx        # Layout raiz, metadados, viewport e Analytics
-│   └── page.tsx          # Página institucional principal
+│   ├── favicon.ico        # Ícone multi-resolução (16 a 256px) gerado a partir do ícone vetorial
+│   ├── apple-icon.png     # Ícone 180x180 para adicionar à tela de início do iOS
+│   ├── icon.svg           # Ícone vetorial (broto), usado por navegadores modernos
+│   ├── globals.css        # Tokens de tema, estilos globais e utilitários visuais
+│   ├── layout.tsx         # Layout raiz, metadados, viewport e Analytics
+│   └── page.tsx           # Página institucional principal
 ├── components/
-│   ├── site-header.tsx   # Cabeçalho, navegação, controle de tema e rodapé
+│   ├── brand-icons.tsx    # Ícones de marca em SVG (Instagram, YouTube, WhatsApp e LinkedIn)
+│   ├── hero-carousel.tsx  # Carrossel do início com as imagens da galeria
+│   ├── pix-donation.tsx   # QR Code do Pix e cópia da chave de doação
+│   ├── site-header.tsx    # Cabeçalho, navegação, controle de tema e rodapé
+│   ├── social-links.tsx   # Lista reutilizável de redes sociais
 │   └── ui/
-│       └── button.tsx    # Componente base de botão padronizado
+│       └── button.tsx     # Componente base de botão padronizado
 ├── lib/
-│   └── utils.ts          # Utilitários compartilhados, incluindo cn()
-├── public/               # Arquivos públicos e imagens estáticas, quando aplicável
-├── components.json       # Configuração do shadcn/ui
-├── next.config.mjs       # Configuração do Next.js
-├── postcss.config.mjs   # Configuração do PostCSS/Tailwind
-├── tsconfig.json         # Configuração do TypeScript
-├── package.json          # Dependências e scripts do projeto
-└── pnpm-lock.yaml        # Lockfile das dependências
+│   └── utils.ts           # Utilitários compartilhados, incluindo cn()
+├── public/assets/img/
+│   ├── galeria/           # Imagens da galeria em WebP, otimizadas para a web
+│   └── qrcode-pix-semente.png  # QR Code do Pix (PNG sem perdas)
+├── components.json        # Configuração do shadcn/ui
+├── next.config.mjs        # Configuração do Next.js
+├── postcss.config.mjs     # Configuração do PostCSS/Tailwind
+├── tsconfig.json          # Configuração do TypeScript
+├── package.json           # Dependências e scripts do projeto
+└── pnpm-lock.yaml         # Lockfile das dependências
+```
+
+## Imagens
+
+As imagens originais do projeto são mantidas em `public/assets/img/`. As versões
+usadas no site ficam em `public/assets/img/galeria/` no formato WebP, com no
+máximo 2000px de largura, reduzindo o total de cerca de 104 MB para cerca de
+1,2 MB.
+
+O QR Code do Pix é um PNG sem compressão com perda, para que os módulos
+permanecam nítidos e a leitura por qualquer aplicativo de banco continue
+confiável.
+
+Para gerar novas versões otimizadas a partir dos originais:
+
+```bash
+pnpm dlx sharp-cli@5 -i public/assets/img/semente1.png -o public/assets/img/galeria/semente-1.webp resize 2000 1400 --fit cover --position centre -q 78
 ```
 
 ## Como executar
@@ -84,12 +116,17 @@ A tipografia, o espaçamento, os cartões e os botões foram organizados para ma
 
 ## Conteúdo e imagens
 
-Os textos institucionais são mantidos na página principal e organizados por seções. As imagens podem ser atualizadas em `app/page.tsx` ou movidas para `public/` quando forem incorporadas como arquivos locais.
+Os textos institucionais são mantidos na página principal e organizados por seções. As imagens são carregadas de `public/assets/img/galeria/` pelo componente `components/hero-carousel.tsx`, que concentra a lista de slides e suas legendas.
+
+## Contato e redes
+
+Os canais de contato ficam em `components/social-links.tsx` e são usados na seção de contato. O crédito da desenvolvedora fica no rodapé, em `components/site-header.tsx`.
+
+Os dados de doação via Pix ficam no topo de `components/pix-donation.tsx`, em um objeto único, com a chave, o nome do titular e o tipo de chave.
 
 ## Próximos passos sugeridos
 
 - Conectar o formulário de contato a um serviço de envio de mensagens
-- Substituir URLs externas de imagens por arquivos otimizados em `public/`
 - Adicionar páginas individuais para as reflexões
 - Integrar a agenda com dados reais
 - Adicionar testes automatizados para os fluxos interativos

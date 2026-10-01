@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   ArrowUpRight,
   BookOpen,
@@ -6,9 +5,13 @@ import {
   Leaf,
   Mail,
   MapPin,
-  Menu,
+  MessageCircle,
+  Sprout,
   Users,
 } from "lucide-react";
+import { HeroCarousel } from "@/components/hero-carousel";
+import { PixDonation } from "@/components/pix-donation";
+import { SocialLinks } from "@/components/social-links";
 import { Footer, SiteHeader } from "@/components/site-header";
 
 const values = [
@@ -25,14 +28,17 @@ const reflections = [
   [
     "Individualismo cristão: morte do cristianismo",
     "Cresce cada vez mais o individualismo cristão: é cada um por si e Deus por todos. Seria correta essa visão do cristianismo? Seria cristã essa conduta?",
+    "https://sementearacaju.medium.com/individualismo-crist%C3%A3o-morte-do-cristianismo-dfc0c7f11980",
   ],
   [
     "Apologética de uma existência comunitária desviante",
     "É nos vãos, nas brechas que o ministério e vocação de Paulo são delineados. Paulo não conviveu com Cristo, como os doze.",
+    "https://sementearacaju.medium.com/apolog%C3%A9tica-de-uma-exist%C3%AAncia-comunit%C3%A1ria-desviante-463fe2b9578b",
   ],
   [
     "Carta Pastoral em alusão ao Dia do Orgulho LGBTQIA+",
     "Queridos/as/es irmãos/ãs/nes, muito nos alegra escrever esta carta pastoral em um dia tão importante para a comunidade LGBTQIA+.",
+    "https://sementearacaju.medium.com/carta-pastoral-em-alus%C3%A3o-ao-dia-do-orgulho-lgbtqia-3c885f9ac8d8",
   ],
 ];
 
@@ -45,7 +51,7 @@ export default function Home() {
           id="inicio"
           className="relative overflow-hidden border-b border-border bg-surface"
         >
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-10 lg:py-14">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-10 lg:py-14">
             <div className="order-2 lg:order-1">
               <p className="eyebrow">
                 <Leaf className="size-4" /> Igreja Batista Semente
@@ -57,29 +63,16 @@ export default function Home() {
                 Um espaço de fé, acolhimento, diversidade e compromisso com a
                 vida. Venha ser igreja com a gente.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#sobre" className="button-primary">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a href="#sobre" className="button-primary justify-center sm:justify-start">
                   Conheça A Semente <ArrowUpRight className="size-4" />
                 </a>
-                <a href="#contato" className="button-secondary">
+                <a href="#contato" className="button-secondary justify-center sm:justify-start">
                   Fale conosco
                 </a>
               </div>
             </div>
-            <div className="relative order-1 aspect-[16/10] overflow-hidden rounded-[1.5rem] lg:order-2 lg:aspect-[4/3]">
-              <Image
-                src="https://hom-semente.netlify.app/assets/img/carrossel/semente3.png"
-                alt="Imagem da nossa semente"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 55vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#4f2029]/55 to-transparent" />
-              <p className="absolute bottom-5 left-5 text-sm font-medium text-white">
-                Uma comunidade que celebra a vida
-              </p>
-            </div>
+            <HeroCarousel />
           </div>
         </section>
         <section
@@ -197,28 +190,50 @@ export default function Home() {
           </div>
         </section>
         <section id="contribua" className="bg-primary text-primary-foreground">
-          <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-            <div>
-              <p className="eyebrow text-primary-foreground/70">
-                Seja generoso
-              </p>
-              <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight">
-                Nossa contribuição para a construção do Reino de Deus deve ser
-                integral.
-              </h2>
-              <p className="mt-4 max-w-2xl leading-7 text-primary-foreground/80">
-                Nossa contribuição para a construção do Reino de Deus deve ser
-                integral, ou seja, ela envolve a nossa vida, tempo, orações e
-                recursos. Tudo isso é indispensável para que possamos servir às
-                pessoas. Sabemos que parte desse serviço envolve a contribuição
-                financeira de todos aqueles e aquelas que direta ou
-                indiretamente são abençoados(as) pela Semente. Convidamos você a
-                exercitar sua generosidade apoiando nossa igreja (2Co 9,7).
-              </p>
+          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+              <div>
+                <p className="eyebrow text-primary-foreground/70">
+                  Seja generoso
+                </p>
+                <h2 className="mt-4 max-w-2xl text-3xl font-semibold leading-tight tracking-[-0.03em] sm:text-4xl">
+                  Nossa contribuição para a construção do Reino de Deus deve ser
+                  integral.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-7 text-primary-foreground/85">
+                  Nossa contribuição para a construção do Reino de Deus deve ser
+                  integral, ou seja, ela envolve a nossa vida, tempo, orações e
+                  recursos. Tudo isso é indispensável para que possamos servir às
+                  pessoas. Sabemos que parte desse serviço envolve a contribuição
+                  financeira de todos aqueles e aquelas que direta ou
+                  indiretamente são abençoados(as) pela Semente. Convidamos você a
+                  exercitar sua generosidade apoiando nossa igreja (2Co 9,7).
+                </p>
+
+                <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                  {[
+                    { icon: Heart, label: "Vida e tempo" },
+                    { icon: Leaf, label: "Oração" },
+                    { icon: Sprout, label: "Recursos" },
+                    { icon: Users, label: "Serviço" },
+                  ].map(({ icon: Icon, label }) => (
+                    <li
+                      key={label}
+                      className="flex items-center gap-2.5 rounded-xl border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-3 text-sm font-medium"
+                    >
+                      <Icon className="size-4 shrink-0" aria-hidden="true" />
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+
+                <a href="#contato" className="button-light mt-8 w-full justify-center sm:w-auto sm:justify-start">
+                  Fale com a gente <ArrowUpRight className="size-4" />
+                </a>
+              </div>
+
+              <PixDonation />
             </div>
-            <a href="#contato" className="button-light">
-              Veja como contribuir <ArrowUpRight className="size-4" />
-            </a>
           </div>
         </section>
         <section
@@ -228,12 +243,14 @@ export default function Home() {
           <p className="eyebrow">Pensar e praticar</p>
           <h2 className="section-title">Reflexões</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {reflections.map(([title, text]) => (
+            {reflections.map(([title, text, link]) => (
               <article key={title} className="info-card">
                 <h3>{title}</h3>
                 <p>{text}...</p>
                 <a
-                  href="#contato"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary"
                 >
                   Ver mais <ArrowUpRight className="size-4" />
@@ -243,39 +260,90 @@ export default function Home() {
           </div>
         </section>
         <section id="contato" className="bg-surface-soft">
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-10 lg:py-28">
-            <div>
-              <p className="eyebrow">Vamos conversar</p>
-              <h2 className="section-title">Contato</h2>
-              <p className="mt-5 max-w-sm leading-7 text-muted-foreground">
-                Estamos disponíveis para ouvir você, acolher sua história e
-                construir caminhos juntos.
-              </p>
-              <p className="mt-8 flex items-center gap-2 font-medium text-primary">
-                <Mail className="size-4" /> sementearacaju@gmail.com
-              </p>
+          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+              <div>
+                <p className="eyebrow">Vamos conversar</p>
+                <h2 className="section-title">Contato</h2>
+                <p className="mt-5 max-w-sm leading-7 text-muted-foreground">
+                  Estamos disponíveis para ouvir você, acolher sua história e
+                  construir caminhos juntos.
+                </p>
+
+                <ul className="mt-8 space-y-3">
+                  <li>
+                    <a
+                      href="mailto:sementearacaju@gmail.com"
+                      className="contact-channel"
+                    >
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                        <Mail className="size-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                          E-mail
+                        </span>
+                        <span className="block truncate font-medium text-foreground">
+                          sementearacaju@gmail.com
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://wa.me/5579988172199"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-channel"
+                    >
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                        <MessageCircle className="size-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                          WhatsApp
+                        </span>
+                        <span className="block truncate font-medium text-foreground">
+                          (79) 98817-2199 — falar agora
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div className="mt-8 border-t border-border pt-8">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                    Acompanhe a Semente
+                  </p>
+                  <SocialLinks className="mt-4" />
+                </div>
+              </div>
+
+              <form className="grid gap-4">
+                <input
+                  className="field"
+                  placeholder="Seu nome"
+                  aria-label="Seu nome"
+                />
+                <input
+                  className="field"
+                  type="email"
+                  placeholder="Seu e-mail"
+                  aria-label="Seu e-mail"
+                />
+                <textarea
+                  className="field min-h-36 resize-y"
+                  placeholder="Digite algo..."
+                  aria-label="Digite algo..."
+                />
+                <button
+                  className="button-primary w-full justify-center sm:w-fit sm:justify-start"
+                  type="button"
+                >
+                  Enviar <ArrowUpRight className="size-4" />
+                </button>
+              </form>
             </div>
-            <form className="grid gap-4">
-              <input
-                className="field"
-                placeholder="Seu nome"
-                aria-label="Seu nome"
-              />
-              <input
-                className="field"
-                type="email"
-                placeholder="Seu e-mail"
-                aria-label="Seu e-mail"
-              />
-              <textarea
-                className="field min-h-36 resize-y"
-                placeholder="Digite algo..."
-                aria-label="Digite algo..."
-              />
-              <button className="button-primary w-fit" type="button">
-                Enviar <ArrowUpRight className="size-4" />
-              </button>
-            </form>
           </div>
         </section>
       </main>
