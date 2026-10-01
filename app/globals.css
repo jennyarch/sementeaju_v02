@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: light;
+  --background: #f7f3ed;
+  --foreground: #2c2523;
+  --card: #fffdf9;
+  --card-foreground: #2c2523;
+  --primary: #722b36;
+  --primary-foreground: #fffaf4;
+  --muted: #eee6dc;
+  --muted-foreground: #756a65;
+  --border: rgba(90, 54, 48, 0.14);
+  --ring: #a24f5c;
+  --surface: #fffdf9;
+  --surface-soft: #eee6dc;
+  --accent: #c5a46d;
+  --radius: 0.75rem;
+}
+.dark {
+  color-scheme: dark;
+  --background: #1c1818;
+  --foreground: #f7f0e8;
+  --card: #282020;
+  --card-foreground: #f7f0e8;
+  --primary: #d17b86;
+  --primary-foreground: #1c1818;
+  --muted: #382b2b;
+  --muted-foreground: #c8b9ae;
+  --border: rgba(247, 240, 232, 0.14);
+  --ring: #e0a0a6;
+  --surface: #282020;
+  --surface-soft: #382b2b;
+  --accent: #d6b878;
+}
+
+* {
+  @apply border-border outline-ring/50;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  @apply bg-background text-foreground;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary;
+  }
+  .section-title {
+    @apply mt-3 max-w-xl text-4xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-5xl;
+  }
+  .info-card {
+    @apply rounded-2xl border border-border bg-card p-7 shadow-[0_14px_40px_rgba(79,32,41,0.06)] transition-transform hover:-translate-y-1;
+  }
+  .info-card h3 {
+    @apply mt-5 text-xl font-semibold text-foreground;
+  }
+  .info-card p,
+  .info-card li {
+    @apply mt-3 text-sm leading-7 text-muted-foreground;
+  }
+  .icon-accent {
+    @apply size-8 text-primary;
+  }
+  .button-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85;
+  }
+  .button-secondary {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted;
+  }
+  .button-light {
+    @apply inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-background/85;
+  }
+  .field {
+    @apply w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/30;
+  }
+}
